@@ -26,7 +26,7 @@ const configSchema = Type.Object(
      * The symbol name used to unwrap a schema into a TypeScript type.
      * Imported as a type from `typeboxImportDependencyName`.
      */
-    unwrapSchemaImportName: Type.String({ default: "Type.Static" }),
+    unwrapSchemaImportName: Type.String({ default: "Static" }),
     /**
      * Whether to allow additional properties in the generated schemes
      */
