@@ -3,7 +3,7 @@ Generate versatile [typebox](https://github.com/sinclairzx81/typebox) schemes fr
 
 > Currently does not support [mongoDB composite types](https://www.prisma.io/docs/orm/prisma-schema/data-model/models#defining-composite-types)
 
-> Development is currently on hold, please see [here](https://github.com/m1212e/prismabox/issues/59) 
+> Development is currently on hold, please see [here](https://github.com/m1212e/prismabox/issues/59)
 
 Install it in your project,
 ```bash
@@ -22,6 +22,10 @@ generator prismabox {
   typeboxImportVariableName = "t"
   // you also can specify the dependency from which the above import should happen. This is useful if a package re-exports the typebox package and you would like to use that
   typeboxImportDependencyName = "elysia"
+  // optionally generate TS aliases for each schema: export type MySchema = UnwrapSchema<typeof MySchema>
+  generateTsTypes = true
+  // optionally customize the unwrap utility type symbol (imported from the same package as typeboxImportDependencyName)
+  unwrapSchemaImportName = "UnwrapSchema"
   // by default the generated schemes do not allow additional properties. You can allow them by setting this to true
   additionalProperties = true
   // optionally enable the data model generation. See the data model section below for more info
