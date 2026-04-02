@@ -38,6 +38,8 @@ await writeFile(
   JSON.stringify({
     ...packagejson,
     version,
-    bin: { prismabox: "cli.js" },
+    bin: {
+      prismabox: "cli.js",
+    },
   }),
 );
