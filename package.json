@@ -1,6 +1,6 @@
 {
   "name": "@hyoretsu/prismabox",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "license": "MIT",
   "description": "Typebox generator for prisma schema",
   "author": {
@@ -19,6 +19,9 @@
   "homepage": "https://github.com/hyoretsu/prismabox",
   "repository": {
     "url": "https://github.com/hyoretsu/prismabox.git"
+  },
+  "bin": {
+    "prismabox": "./dist/cli.js"
   },
   "files": [
     "dist"
