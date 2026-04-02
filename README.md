@@ -7,7 +7,7 @@ Install it in your project,
 ```bash
 npm i -D @hyoretsu/prismabox
 pnpm i -D @hyoretsu/prismabox
-bun add -D @hyoretsu/prismabox
+bun a -D @hyoretsu/prismabox
 ```
 
  then add
