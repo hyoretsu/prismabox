@@ -46,23 +46,6 @@ jobs:
             echo "Created and pushed ${VERSION_TAG}."
           fi
 
-  publish:
-    name: Publish
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - name: Install dependencies
-        run: NODE_ENV=development bun i
-      - name: Build and publish
-        run: bunx npm publish --provenance --access public
-
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -86,3 +69,22 @@ jobs:
               prerelease,
               generate_release_notes: true,
             });
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install npm
+        run: bun add -g npm
+      - name: Install dependencies
+        run: NODE_ENV=development bun i
+      - name: Build and publish
+        run: bunx npm publish --provenance --access public
