@@ -1,0 +1,46 @@
+name: Publish new version
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - package.json
+  release:
+    types: [created]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: NODE_ENV=development bun i
+      - name: Ensure version tag exists
+        run: |
+          VERSION=$(bun -p "require('./package.json').version")
+          VERSION_TAG="v${VERSION}"
+
+          git fetch --tags
+
+          if ! git rev-parse "${VERSION_TAG}" >/dev/null 2>&1; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag "${VERSION_TAG}"
+            git push origin "${VERSION_TAG}"
+            echo "Created and pushed ${VERSION_TAG}."
+          fi
+      - name: Build and publish
+        run: bunx npm publish --provenance --access public

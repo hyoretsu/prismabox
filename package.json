@@ -20,11 +20,15 @@
   "repository": {
     "url": "https://github.com/hyoretsu/prismabox.git"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "bun run build && bunx prisma generate",
     "build": "bun run typecheck && bun build.ts",
     "lint": "biome check --write .",
     "format": "bun run lint",
+    "prepublishOnly": "bun run build",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
