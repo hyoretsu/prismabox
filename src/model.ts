@@ -32,14 +32,14 @@ function convertModelToStandalone(
   let exportStr = `export const ${generatedName} = ${input.stringRepresentation}\n`;
 
   if (getConfig().generateTsTypes) {
-    exportStr += `export type ${generatedName} = ${getConfig().unwrapSchemaImportName}<typeof ${generatedName}>\n`
+    exportStr += `export type ${generatedName} = ${getConfig().unwrapSchemaImportName}<typeof ${generatedName}>\n`;
   }
 
   return exportStr;
 }
 
 function typepoxImportStatement() {
-  let imports = getConfig().typeboxImportVariableName
+  let imports = getConfig().typeboxImportVariableName;
 
   if (getConfig().generateTsTypes) {
     imports += `, type ${getConfig().unwrapSchemaImportName}`;
@@ -89,7 +89,10 @@ export function mapAllModelsForWrite() {
     const relations = processedRelations.find((e) => e.name === key);
     let composite: string;
     if (plain && relations) {
-      composite = makeComposite([`${key}Plain`, `${key}Relations`]);
+      composite = makeComposite(
+        [`${key}Plain`, `${key}Relations`],
+        [false, true],
+      );
     } else if (plain) {
       composite = `${key}Plain`;
     } else if (relations) {
